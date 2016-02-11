@@ -1,0 +1,9 @@
+extends ./includes/layout
+
+block content
+  include ./includes/header
+  #app
+
+  script.
+    window.App = {workId: '!{workId}', creatorId: '!{creatorId}'};
+  script(src='/user.js')

@@ -66,5 +66,8 @@
     "transform": [
       "babelify"
     ]
+  },
+  "engines": {
+    "node": "4.3.0"
   }
 }

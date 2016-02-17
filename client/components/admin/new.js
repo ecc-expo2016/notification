@@ -164,7 +164,6 @@ export default class New extends Component {
                     className='input'
                     type='text'
                     value={roleValue}
-                    required
                     onChange={this.handleChangeCreator.bind(this, 'role', i)}
                     placeholder='担当' />
                 </p>

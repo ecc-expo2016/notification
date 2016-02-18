@@ -54,14 +54,14 @@ export default class List extends Component {
       <table className='table'>
         <thead>
           <tr>
-            <th>部門</th>
-            <th>作品名</th>
-            <th>説明文</th>
-            <th>名前</th>
-            <th>担当</th>
-            <th>メール</th>
-            <th>状態</th>
-            <th>削除</th>
+            <th className='nowrap'>部門</th>
+            <th className='nowrap'>作品名</th>
+            <th className='nowrap'>説明文</th>
+            <th className='nowrap'>名前</th>
+            <th className='nowrap'>担当</th>
+            <th className='nowrap'>メール</th>
+            <th className='nowrap'>状態</th>
+            <th className='nowrap'>削除</th>
           </tr>
         </thead>
 
@@ -74,11 +74,13 @@ export default class List extends Component {
                 {i === 0 && [
                   <td
                     key={`${creator._id}-section`}
+                    className='nowrap'
                     rowSpan={creators.length}>
                     {this.getSectionName(work.section)}
                   </td>,
                   <td
                     key={`${creator._id}-name`}
+                    className='nowrap'
                     rowSpan={creators.length}>
                     {work.name}
                   </td>,
@@ -88,10 +90,10 @@ export default class List extends Component {
                     {work.description}
                   </td>
                 ]}
-                <td>{creator.name}</td>
-                <td>{creator.role}</td>
-                <td>{creator.email}</td>
-                <td>
+                <td className='nowrap'>{creator.name}</td>
+                <td className='nowrap'>{creator.role}</td>
+                <td className='nowrap'>{creator.email}</td>
+                <td className='nowrap'>
                   <a href={`/user/${work._id}/${creator._id}`}>
                     {(() => {
                       switch (creator.status) {
@@ -106,6 +108,7 @@ export default class List extends Component {
                 {i === 0 && [
                   <td
                     key={`${creator._id}-delete`}
+                    className='nowrap'
                     rowSpan={creators.length}>
                     <button
                       className='button is-danger'

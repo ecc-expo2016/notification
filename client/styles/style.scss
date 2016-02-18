@@ -18,6 +18,10 @@
   color: darken($red, 10%);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .table {
   td, th {
     vertical-align: middle;

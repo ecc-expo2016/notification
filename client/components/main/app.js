@@ -66,13 +66,16 @@ export default class App extends Component {
                   return (
                     <tr key={creator._id}>
                       {isSectionFirst && isCreatorFirst && (
-                        <td rowSpan={creatorTotal}>
+                        <td
+                          className='nowrap'
+                          rowSpan={creatorTotal}>
                           {this.getSectionName(section.id)}
                         </td>
                       )}
                       {isCreatorFirst && [
                         <td
                           key={`${creator._id}-name`}
+                          className='nowrap'
                           rowSpan={creators.length}>
                           {work.name}
                         </td>,
@@ -82,9 +85,9 @@ export default class App extends Component {
                           {work.description}
                         </td>
                       ]}
-                      <td>{creator.name}</td>
-                      <td>{creator.role}</td>
-                      <td className='is-centered'>
+                      <td className='nowrap'>{creator.name}</td>
+                      <td className='nowrap'>{creator.role}</td>
+                      <td className='nowrap'>
                         {(() => {
                           switch (creator.status) {
                             case STANDING:

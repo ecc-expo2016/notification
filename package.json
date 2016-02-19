@@ -24,7 +24,7 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-stage-0": "6.5.0",
     "body-parser": "1.15.0",
-    "bulma": "0.0.10",
+    "bulma": "0.0.15",
     "compression": "1.6.1",
     "connect-flash": "0.1.1",
     "connect-mongo": "1.1.0",

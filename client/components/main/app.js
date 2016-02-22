@@ -1,5 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import socketIO from 'socket.io-client';
 import flatten from 'lodash.flatten';
 import throttle from 'lodash.throttle';
@@ -10,13 +11,29 @@ const socket = socketIO();
 const STANDING = 1;
 const TAKEN = 2;
 
+const wait = delay => new Promise(done => setTimeout(done, delay));
+
 export default class App extends Component {
   state = {
     sections: data,
-    works: []
+    works: [],
+    notifications: []
   };
-  handleClick = throttle((workId, creatorId) => {
+  handleClick = throttle(async (workId, creatorId) => {
     socket.emit('notify', workId, creatorId);
+
+    // show notification
+    let {notifications} = this.state;
+    const id = Math.random().toString(28);
+    notifications.push({id, workId, creatorId});
+    this.setState({notifications});
+    await wait(3000);
+
+    // delete shown notification
+    notifications = this.state.notifications;
+    const index = notifications.findIndex(item => item.id === id);
+    notifications.splice(index, 1);
+    this.setState({notifications});
   }, 1000);
   getSectionName = id => {
     const {sections} = this.state;
@@ -33,10 +50,30 @@ export default class App extends Component {
     });
   }
   render() {
-    const {sections, works} = this.state;
+    const {sections, works, notifications} = this.state;
 
     return (
       <section className='section'>
+        <div className='notification-container'>
+          <ReactCSSTransitionGroup
+            transitionName='fade'
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}>
+            {notifications.slice().reverse().map(({id, workId, creatorId}) => {
+              const {name, creators} = works.find(({_id}) => _id === workId);
+              const creator = creators.find(({_id}) => _id === creatorId);
+
+              return (
+                <div
+                  key={id}
+                  className='notification is-success'>
+                  {creator.name}さん({name})に通知しました。
+                </div>
+              );
+            })}
+          </ReactCSSTransitionGroup>
+        </div>
+
         <div className='container is-fluid'>
           <table className='table'>
             <thead>

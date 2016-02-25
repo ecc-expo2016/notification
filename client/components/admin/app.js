@@ -16,7 +16,7 @@ export default class App extends Component {
         <Header />
 
         <section className='section'>
-          <div className='container'>
+          <div className='container is-fluid'>
             {children && React.cloneElement(children, {sections})}
           </div>
         </section>

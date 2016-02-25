@@ -56,6 +56,7 @@ export default class App extends Component {
       <section className='section'>
         <div className='notification-container'>
           <ReactCSSTransitionGroup
+            component='div'
             transitionName='fade'
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}>
@@ -67,7 +68,7 @@ export default class App extends Component {
                 <div
                   key={id}
                   className='notification is-success'>
-                  {creator.name}さん({name})に通知しました。
+                  {creator.name}さん（{name}）に通知しました。
                 </div>
               );
             })}
@@ -86,13 +87,13 @@ export default class App extends Component {
 
             <tbody>
               {flatten(sections.map(section => {
-                const sectionData = works.filter((work) =>
-                  work.section === section.id
+                const sectionData = works.filter(
+                  work => work.section === section.id
                 );
 
-                const creatorTotal = sectionData.reduce((total, {creators}) => {
-                  return total + creators.length;
-                }, 0);
+                const creatorLength = sectionData.reduce(
+                  (total, {creators}) => total + creators.length, 0
+                );
 
                 return sectionData.map((work, workIndex) => {
                   const {creators} = work;
@@ -106,7 +107,7 @@ export default class App extends Component {
                         {isSectionFirst && isCreatorFirst && (
                           <td
                             className='nowrap'
-                            rowSpan={creatorTotal}>
+                            rowSpan={creatorLength}>
                             {this.getSectionName(section.id)}
                           </td>
                         )}
@@ -125,7 +126,7 @@ export default class App extends Component {
                         ]}
                         <td className='nowrap'>{creator.name}</td>
                         <td className='nowrap'>{creator.role}</td>
-                        <td className='nowrap'>
+                        <td className='nowrap is-text-centered'>
                           {(() => {
                             switch (creator.status) {
                               case STANDING:

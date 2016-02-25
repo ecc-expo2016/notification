@@ -19,6 +19,8 @@ import {Work} from './models/database';
 import routes from './routes';
 import admin from './routes/admin';
 
+mongoose.connect(process.env.MONGOLAB_URI);
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -103,7 +105,7 @@ io.on('connection', socket => {
       subject: `${name}（${work.name}）さんへ通知が届きました`,
       text: [
         `${name}（${work.name}）さんへ通知が届きました。`,
-        '○○までお越しください。',
+        '企業ブースまでお越しください。',
         '',
         '通知の停止・再開はこちらから設定してください。',
         'https://ecc-expo2016-notification.herokuapp.com/user/' +

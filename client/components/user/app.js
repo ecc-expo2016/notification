@@ -15,6 +15,11 @@ export default class App extends Component {
     work: {},
     creator: {}
   };
+  handleConnect = works => {
+    const work = works.find(({_id}) => _id === workId);
+    const creator = work.creators.find(({_id}) => _id === creatorId);
+    this.setState({work, creator});
+  };
   handleClick = throttle(status => {
     // optimistic updates
     const {creator} = this.state;
@@ -24,14 +29,8 @@ export default class App extends Component {
     socket.emit('change', workId, creatorId, status);
   }, 1000);
   componentDidMount() {
-    const handleConnect = works => {
-      const work = works.find(({_id}) => _id === workId);
-      const creator = work.creators.find(({_id}) => _id === creatorId);
-      this.setState({work, creator});
-    };
-
-    socket.on('init', handleConnect);
-    socket.on('update', handleConnect);
+    socket.on('init', this.handleConnect);
+    socket.on('update', this.handleConnect);
   }
   render() {
     const {work, creator} = this.state;

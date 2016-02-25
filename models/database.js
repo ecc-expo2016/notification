@@ -1,8 +1,6 @@
 'use strict';
 import mongoose, {Schema} from 'mongoose';
 
-mongoose.connect(process.env.MONGOLAB_URI);
-
 const creatorSchema = new Schema({
   name: {
     type: String,

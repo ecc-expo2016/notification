@@ -47,8 +47,6 @@
 }
 
 .fade {
-  $this: &;
-
   &-enter {
     opacity: .01;
 
